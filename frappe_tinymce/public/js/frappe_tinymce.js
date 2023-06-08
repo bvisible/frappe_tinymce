@@ -1,4 +1,3 @@
-
 frappe.ui.form.ControlTextEditor = class ControlTextEditor extends frappe.ui.form.ControlCode {
     make_wrapper() {
         super.make_wrapper();
@@ -10,9 +9,6 @@ frappe.ui.form.ControlTextEditor = class ControlTextEditor extends frappe.ui.for
     }
 
     make_quill_editor() {
-        // if (this.quill) return;
-        // this.quill = new Quill(this.quill_container[0], this.get_quill_options());
-        // this.bind_events();
         const that = this
         this.quill_container = $('<div>').appendTo(this.input_area);
         tinymce.init({
@@ -31,9 +27,8 @@ frappe.ui.form.ControlTextEditor = class ControlTextEditor extends frappe.ui.for
             toolbar_sticky: true,
             promotion: false,
             link_default_target: "_blank",
-            // hide menubar
             menubar: false,
-            skin: "snow", //Add these two options
+            skin: "snow",
             icons: "small",
             setup: function(editor) {
                 that.editor_id = editor.id
@@ -41,21 +36,27 @@ frappe.ui.form.ControlTextEditor = class ControlTextEditor extends frappe.ui.for
                     that.parse_validate_and_set_in_model(e.level.content);
                 });
                 editor.on('init', function (e) {
-                    editor.setContent(that.value);
+                    // Vérifier que `that.value` n'est pas `undefined` avant d'appeler `setContent`
+                    if (that.value !== undefined) {
+                        editor.setContent(that.value);
+                    }
+                    that.activeEditor = editor; // assign activeEditor when TinyMCE is fully initialized
                 });
             }
         });
-        this.activeEditor = tinymce.activeEditor
     }
 
     set_formatted_input(value){
         if (this.frm && !this.frm.doc.__setContent){
-            if(value){
-                this.activeEditor.setContent(value)
-            }else{
-                this.activeEditor.setContent("")
+            // Check if activeEditor is not undefined
+            if(this.activeEditor){
+                if(value){
+                    this.activeEditor.setContent(value)
+                } else {
+                    this.activeEditor.setContent("")
+                }
+                this.frm.doc.__setContent = 1
             }
-            this.frm.doc.__setContent = 1
         }
     }
 }
