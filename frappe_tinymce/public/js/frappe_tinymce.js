@@ -33,6 +33,8 @@ frappe.ui.form.ControlTextEditor = class ControlTextEditor extends frappe.ui.for
             link_default_target: "_blank",
             // hide menubar
             menubar: false,
+            skin: "snow", //Add these two options
+            icons: "small",
             setup: function(editor) {
                 that.editor_id = editor.id
                 editor.on('Change', function(e) {
