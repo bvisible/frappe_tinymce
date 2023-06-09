@@ -8,7 +8,7 @@ Replace frappe's Quill Text Editor with tinyMCE Text Editor
 ## Installation Steps
 ### Step 1) One time to get app
 
-```bench get-app https://github.com/shridarpatil/frappe_tinymce```
+```bench get-app https://github.com/bvisible/frappe_tinymce.git```
 
 ### Step 2) to install app on any instance/site
 
