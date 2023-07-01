@@ -11,8 +11,10 @@ frappe.ui.form.ControlTextEditor = class ControlTextEditor extends frappe.ui.for
     make_quill_editor() {
         const that = this
         this.quill_container = $('<div>').appendTo(this.input_area);
+        const root = document.documentElement;
         tinymce.init({
             target: this.input_area,
+            content_style: `body { background-color: var(--control-bg); }`
             toolbar: 'undo redo | bold italic underline strikethrough | fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment | footnotes | mergetags',
             font_size_formats: '10px 11px 12px 14px 15px 16px 18px 24px 36px',
             plugins: [
