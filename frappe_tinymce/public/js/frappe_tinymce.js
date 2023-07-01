@@ -11,7 +11,6 @@ frappe.ui.form.ControlTextEditor = class ControlTextEditor extends frappe.ui.for
     make_quill_editor() {
         const that = this
         this.quill_container = $('<div>').appendTo(this.input_area);
-        const root = document.documentElement;
         tinymce.init({
             target: this.input_area,
             content_style: `body { background-color: var(--control-bg); }`
